@@ -80,11 +80,19 @@ export default {
         const { data } = await this.$http.post('login', this.loginForm)
         console.log(data)
         if (data.meta.status !== 200) {
-          console.log('登录失败')
+          // console.log('登录失败')
+          // 引用element的消息提示框 报错 , 以及成功
+          this.$message.error('登录失败')
           return false
         }
         // 代码到这里就是成功
-        console.log('登录成功')
+        // console.log('登录成功')
+        this.$message.success('登录成功')
+        // 登录成功 保存token 以后每次登录都会带上这个token  当前对象的 data下的 token
+        window.sessionStorage.setItem('token', data.data.token)
+        // 登录成功后跳转到 home 页面  拿到当前的路由对象
+        this.$router.push('/home')
+        return false
       })
     }
   }
