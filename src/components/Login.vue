@@ -78,7 +78,7 @@ export default {
         // this.loginForm 后台需要传递的参数 {username:'',password:""}
         // 异步 需要加 await  函数需要加 async
         const { data } = await this.$http.post('login', this.loginForm)
-        console.log(data)
+        // console.log(data)
         if (data.meta.status !== 200) {
           // console.log('登录失败')
           // 引用element的消息提示框 报错 , 以及成功

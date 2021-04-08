@@ -1,15 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 导入登录组件
-import Login from '../components/Login'
+// import Login from '../components/Login'
 // 导入首页组件
-import Home from '../components/Home.vue'
+// import Home from '../components/Home'
+// import Welcome from '../components/Welcome'
+import Users from '../components/user/Users.vue'
+// 路由懒加载方式
+const Login = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/Login')
+const Home = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/Home')
+const Welcome = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/Welcome')
 Vue.use(VueRouter)
 const routes = [
   // 重定向根组件到登录组件
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
-  { path: '/home', component: Home }
+  {
+    path: '/home',
+    component: Home,
+    children: [
+      // 因为这个Welcome 是home下面的子组件 所以在home 下面
+      // 二级路由 的页面   重定向在 welcome 页面
+      { path: '/home', redirect: '/welcome' },
+      { path: '/welcome', component: Welcome },
+      { path: '/users', component: Users }
+    ]
+  }
 ]
 const router = new VueRouter({
   routes

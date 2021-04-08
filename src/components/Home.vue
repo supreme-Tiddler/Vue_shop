@@ -3,24 +3,26 @@
     <!-- 头部区域 -->
     <el-header>
       <!-- 标题 -->
-      <span>电商后台管理系统</span>
+      <span>后台管理系统</span>
       <el-button type="info" @click="loginout">退出</el-button>
     </el-header>
     <el-container>
       <!-- 侧边栏 -->
       <el-aside :width="isCollapse?'64px':'200px'">
         <!-- 收缩导航的按钮 -->
+        <!-- router  开启路由模式  当导航激活时,会以index属性作为路径跳转-->
+        <!-- default-active 默认高亮路径  index提供 -->
         <div class="toggle_button" @click="toggleCollapse">| | |</div>
         <el-menu
-        default-active="2"
         class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
         background-color="rgb(49,53,65)"
         text-color="#fff"
-        unique-opened
         :collapse="isCollapse"
-        active-text-color="rgb(64,158,255)">
+        :collapse-transition="false"
+        active-text-color="rgb(64,158,255)"
+        unique-opened
+        router
+        :default-active="activePath">
           <!-- 一级菜单 -->
           <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id">
             <!-- 一级菜单模板 -->
@@ -31,7 +33,7 @@
               <span>{{item.authName}}</span>
             </template>
               <!-- 二级菜单 -->
-              <el-menu-item :index="subItem.id+''" v-for="subItem in item.children" :key="subItem.id">
+              <el-menu-item @click="saveNavState('/'+subItem.path)" :index="'/'+subItem.path" v-for="subItem in item.children" :key="subItem.id">
                  <!-- 二级菜单模板 -->
                  <template slot="title">
                     <!-- 二级图标 -->
@@ -43,8 +45,11 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-      <!-- 主题 -->
-      <el-main>Main</el-main>
+      <!-- 主体 -->
+      <el-main>
+        <!-- 路由占位符 -->
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -62,7 +67,9 @@ export default {
         145: 'el-icon-pie-chart'
       },
       // 默认打开侧边菜单栏
-      isCollapse: false
+      isCollapse: false,
+      // 当前高亮的路径
+      activePath: ''
     }
   },
   // 当vue实例已经创建后
@@ -90,11 +97,18 @@ export default {
       }
       // 将数据存储,用于刷新页面
       this.menuList = res.data
-      console.log(this.menuList)
+      // console.log(this.menuList)
     },
     // 收缩侧边栏
     toggleCollapse () {
       this.isCollapse = !this.isCollapse
+    },
+    // 保存被点击的二级菜单 实现高亮
+    saveNavState (path) {
+      // 做一个本地存储,当页面刷新时,就可以进入刚刚高亮的页面
+      window.sessionStorage.setItem('sctivePath', path)
+      // 将点击的路径,设置为高亮的路径
+      this.activePath = path
     }
   }
 }
