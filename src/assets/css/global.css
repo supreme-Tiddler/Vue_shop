@@ -11,3 +11,6 @@ html,body,#app{
 .box-card{
     margin-top: 10px;
   }
+.el-pagination{
+    margin-top: 10px;
+}

@@ -7,6 +7,7 @@ import axios from 'axios'
 import './assets/css/global.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+
 Vue.use(ElementUI)
 // 设置基准路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'

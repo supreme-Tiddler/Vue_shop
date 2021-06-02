@@ -60,8 +60,9 @@ export default {
       // element ui提供的表单置空resetFields()
       // console.log(this.$refs)  $refs 提交保单的表单组件 ref="LoginFormRef"
       // 获取所有应用表单的组件中的表单,进行重置
-      // 回到最初的状态
+      // 回到最初的状态~
       this.$refs.LoginFormRef.resetFields()
+      // console.log(this.$refs.LoginFormRef)
     },
     // 登录
     login () {
@@ -100,6 +101,9 @@ export default {
 </script>
 <style lang='scss'>
 .login_container {
+  width: 100%;
+  background: url(../assets/images/home-bg.jpg) no-repeat;
+  background-size: 100% 100%;
   background-color: #2b5b6b;
   height: 100%;
   position: relative;
