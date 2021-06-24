@@ -10,6 +10,8 @@ import Users from '../components/user/Users.vue'
 const Login = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/Login')
 const Home = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/Home')
 const Welcome = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/Welcome')
+const Rights = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/power/Rights')
+const Roles = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/power/Roles')
 Vue.use(VueRouter)
 const routes = [
   // 重定向根组件到登录组件
@@ -23,7 +25,9 @@ const routes = [
       // 二级路由 的页面   重定向在 welcome 页面
       { path: '/home', redirect: '/welcome' },
       { path: '/welcome', component: Welcome },
-      { path: '/users', component: Users }
+      { path: '/users', component: Users },
+      { path: '/rights', component: Rights },
+      { path: '/roles', component: Roles }
     ]
   }
 ]
