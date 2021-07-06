@@ -1,10 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// 导入登录组件
-// import Login from '../components/Login'
-// 导入首页组件
-// import Home from '../components/Home'
-// import Welcome from '../components/Welcome'
 import Users from '../components/user/Users.vue'
 // 路由懒加载方式
 const Login = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/Login')
@@ -12,6 +7,8 @@ const Home = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components
 const Welcome = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/Welcome')
 const Rights = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/power/Rights')
 const Roles = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/power/Roles')
+const Cate = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/goods/Cate')
+const Params = () => import(/* webpackChunkName: 'ImportFuncDemo' */ '@/components/goods/Params')
 Vue.use(VueRouter)
 const routes = [
   // 重定向根组件到登录组件
@@ -27,7 +24,9 @@ const routes = [
       { path: '/welcome', component: Welcome },
       { path: '/users', component: Users },
       { path: '/rights', component: Rights },
-      { path: '/roles', component: Roles }
+      { path: '/roles', component: Roles },
+      { path: '/categories', component: Cate },
+      { path: '/params', component: Params }
     ]
   }
 ]
